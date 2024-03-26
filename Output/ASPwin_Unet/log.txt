@@ -1,0 +1,12 @@
+==> Init trainer from ../Output/ASPwin_Unet\best_val_evaluation_index.pkl successfully! 
+
+Dose score is: 2.407660722732544
+DVH score is: 1.4674330095245032
+PCI is: 0.7640435587737728
+HI is: 0.08542383149664205
+==> Init trainer from ../Output/ASPwin_Unet\best_val_evaluation_index.pkl successfully! 
+
+Dose score is: 2.407660722732544
+DVH score is: 1.4674330095245032
+PCI is: 0.7640435587737728
+HI is: 0.08542383149664205

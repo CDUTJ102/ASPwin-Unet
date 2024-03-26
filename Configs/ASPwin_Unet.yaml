@@ -1,0 +1,57 @@
+#
+project_name: 'ASPwin_Unet'
+output_dir: '../Output/ASPwin_Unet'
+list_GPU_ids: [ 0 ]
+
+pre_trained:
+  status: false
+  model_path: '../Output/ASPwin_Unet/best_val_evaluation_index.pkl'
+  only_network: true
+
+model:
+  ASPwinUnet3D:
+    pretrained: null
+    patch_size: [ 2, 2, 2 ]
+    conv_stem: true
+    overlapped_embed: true  # unused
+    downsample_mode: 'conv'  # ('default', 'max-pooling', 'avg-pooling', 'conv')
+    in_chans: 3
+    embed_dim: 96
+    depths: [ 2, 2, 2, 4 ]
+    num_heads: [ 3, 6, 12, 24 ]
+    window_size: [ 4, 4, 4 ]  # 4
+    mlp_ratio: 3.
+    qkv_bias: true
+    qk_scale: null
+    drop_rate: 0.
+    attn_drop_rate: 0.
+    drop_path_rate: 0.2
+    patch_norm: true
+    out_indices: [ 0, 1, 2 ]
+    frozen_stages: -1
+    use_checkpoint: false
+
+training:
+  seed: 0
+  iterations: 200000  # max_iter
+
+  loader:
+    phase: 'train'
+    batch_size: 1
+    num_samples_per_epoch: 1000 # batch_size * 500
+
+  optimizer:
+    lr: 3.0E-4
+    weight_decay: 1.0E-4
+
+  lr_scheduler:
+    type: 'cosine'
+    T_max: 200000
+    eta_min: 1.E-7
+
+  loss:
+    type: 'MAE'  # ('MAE', 'Huber', 'MSE') default: MAE
+    delta: 1.  # for Huber loss
+
+testing:
+  TTA: true
